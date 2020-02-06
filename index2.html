@@ -1,0 +1,88 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
+    <title>Pure Table</title>
+</head>
+<body>
+<input type="button" value="增加一行" onclick="addRow()"/>&nbsp;<input type="button" value="删除一行" onclick="deleteRow()"/>
+<!-- <input type="button" value="增加一列" onclick="addCol()"/>&nbsp;<input type="button" value="删除一列" onclick="deleteCol()"/> -->
+
+<script type="text/javascript">
+    let data = [1, 4, 7, 3, 2];
+
+    var table = document.createElement('table');
+    table.border = 1;
+    table.width = "50%";
+
+    var tbody = document.createElement('tbody');
+    table.appendChild(tbody);
+    let rowLength = table.rows.length;
+    tbody.insertRow(rowLength);
+
+    for (let index = 0; index < data.length; index++) {
+        let rowLength = table.rows.length;
+        tbody.insertRow(rowLength);
+        tbody.rows[rowLength].insertCell(0);
+        tbody.rows[rowLength].cells[0].appendChild(document.createTextNode(index));
+        tbody.rows[rowLength].insertCell(1);
+        tbody.rows[rowLength].cells[1].appendChild(document.createTextNode(data[index]));
+    }
+    
+    function addRow() {
+        let rowLength = table.rows.length;
+        tbody.insertRow(rowLength);
+        // let colLength = table.rows[rowLength-1].cells.length;
+       
+        tbody.rows[rowLength].insertCell(0);
+        tbody.rows[rowLength].cells[0].appendChild(document.createTextNode(rowLength - 1));
+        tbody.rows[rowLength].insertCell(1);
+        tbody.rows[rowLength].cells[1].appendChild(document.createTextNode(0));
+    }
+    
+    function deleteRow() {
+        var rowLength = table.rows.length;
+        if (rowLength < 1) {
+            alert('table is null');
+        } else {
+            table.deleteRow(rowLength - 1);
+        }
+    }
+    // //增加列
+    // function addCol() {
+    //     var rowLength = table.rows.length;
+    //     var colLength;
+    //     if (rowLength < 1) {
+    //         tbody.insertRow(0);
+    //         tbody.rows[0].insertCell(0);
+    //         tbody.rows[0].cells[0].appendChild(document.createTextNode('cell0.0'));
+    //     } else {
+    //         colLength = table.rows[0].cells.length;
+    //         for (var i = 0; i < rowLength; i++) {
+    //             tbody.rows[i].insertCell(colLength);
+    //             tbody.rows[i].cells[colLength].appendChild(document.createTextNode('cell' + i + '.' + colLength));
+    //         }
+    //     }
+    // }
+    // //删除列
+    // function deleteCol() {
+    //     var rowLength = table.rows.length;
+    //     var colLength;
+    //     if (rowLength < 1) {
+    //         alert('table is null');
+    //     } else {
+    //         colLength = table.rows[0].cells.length;
+    //         if (colLength === 1) {
+    //             while (tbody.hasChildNodes()) {
+    //                 tbody.removeChild(tbody.firstChild);
+    //             }
+    //         } else {
+    //             for (var i = 0; i < rowLength; i++) {
+    //                 tbody.rows[i].deleteCell(colLength - 1);
+    //             }
+    //         }
+    //     }
+    // }
+    document.body.appendChild(table);
+</script>
+</body>
+</html>
